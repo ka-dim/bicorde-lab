@@ -11,7 +11,7 @@ pour un projet combinant Rust et Python.
 
 | Module | Statut | Notions maîtrisées | Notions à revoir | Exercice effectué | Commit ou PR |
 |---|---|---|---|---|---|
-| 0 — Diagnostic et préparation | En cours | Différence générale entre Git, GitHub et GitHub Actions ; diagnostic des outils ; création et clonage du dépôt | Identité Git, structure du dépôt, hygiène des fichiers, conventions de commit | Vérification de l’environnement et diagnostic d’un `cd` incorrect | À venir |
+| 0 — Diagnostic et préparation | Terminé | Git, GitHub et GitHub Actions ; environnement ; dépôt public ; identité Git ; working tree, index et commit ; `.gitignore` ; premier push | Approfondir la sécurité des secrets dans les modules suivants | Diagnostic de l’environnement, erreurs de `cd` et de heredoc, préparation du premier commit | `f715f31` |
 | 1 à 16 | Non commencé | — | — | — | — |
 
 ## Journal des séances
@@ -35,8 +35,15 @@ pour un projet combinant Rust et Python.
 - Une erreur de `cd` ne change pas le dossier courant.
 - `user.name` et `user.email` identifient l’auteur d’un commit ; ils ne constituent pas une signature cryptographique.
 
+### Validation du module 0
+
+- Le dépôt public est créé, cloné et synchronisé.
+- Le README et la structure prévue sont documentés.
+- Les principaux fichiers locaux, générés et sensibles sont ignorés.
+- Le premier commit a été poussé sur `main`.
+- Le fonctionnement général du working tree, de l’index et des commits est compris.
+- En cas de secret exposé, la priorité est sa révocation ou sa rotation.
+
 ## Questions en suspens
 
-- Comment structurer proprement les composants Rust et Python ?
-- Quels fichiers locaux faut-il exclure de Git ?
-- Quelle convention de commits utiliser ?
+- Aucune question en suspens pour le module 0.
