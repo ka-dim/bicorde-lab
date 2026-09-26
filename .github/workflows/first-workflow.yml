@@ -8,5 +8,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
       - name: Display a greeting
         run: echo "Hello from GitHub Actions"
