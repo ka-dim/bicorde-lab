@@ -1,0 +1,24 @@
+# macOS
+.DS_Store
+
+# Secrets et configuration locale
+.env
+.env.*
+!.env.example
+
+# Rust
+target/
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Journaux et livrables locaux
+*.log
+dist/
