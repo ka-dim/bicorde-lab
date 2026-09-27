@@ -20,6 +20,8 @@ on:
 jobs:
   hello:
     runs-on: ubuntu-latest
+    env:
+      MANUAL_EVENT: workflow_dispatch
 
     steps:
       - name: Check out repository
@@ -34,6 +36,10 @@ jobs:
           echo "Event: $EVENT_NAME"
           echo "Ref: $REF_NAME"
           echo "Runner OS: $RUNNER_OS"
+
+      - name: Confirm manual execution
+        if: ${{ github.event_name == env.MANUAL_EVENT }}
+        run: echo "This workflow was started manually"
 
       - name: Display a greeting
         run: echo "Hello from GitHub Actions"
