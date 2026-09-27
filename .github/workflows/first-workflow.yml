@@ -25,5 +25,15 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v6
 
+      - name: Display execution context
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          REF_NAME: ${{ github.ref_name }}
+          RUNNER_OS: ${{ runner.os }}
+        run: |
+          echo "Event: $EVENT_NAME"
+          echo "Ref: $REF_NAME"
+          echo "Runner OS: $RUNNER_OS"
+
       - name: Display a greeting
         run: echo "Hello from GitHub Actions"
