@@ -16,8 +16,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  formatting:
-    name: Rust formatting
+  checks:
+    name: Rust checks
     runs-on: ubuntu-latest
 
     steps:
@@ -30,3 +30,7 @@ jobs:
       - name: Check Rust formatting
         working-directory: server
         run: cargo fmt --all -- --check
+
+      - name: Test Rust code
+        working-directory: server
+        run: cargo test --all-features
