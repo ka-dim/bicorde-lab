@@ -1,0 +1,32 @@
+name: Rust CI
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "server/**"
+      - ".github/workflows/rust-ci.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "server/**"
+      - ".github/workflows/rust-ci.yml"
+  workflow_dispatch:
+
+jobs:
+  formatting:
+    name: Rust formatting
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Display Rust version
+        run: rustc --version
+
+      - name: Check Rust formatting
+        working-directory: server
+        run: cargo fmt --all -- --check
