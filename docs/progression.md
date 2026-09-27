@@ -13,7 +13,8 @@ pour un projet combinant Rust et Python.
 |---|---|---|---|---|---|
 | 0 — Diagnostic et préparation | Terminé | Git, GitHub et GitHub Actions ; environnement ; dépôt public ; identité Git ; working tree, index et commit ; `.gitignore` ; premier push | Approfondir la sécurité des secrets dans les modules suivants | Diagnostic de l’environnement, erreurs de `cd` et de heredoc, préparation du premier commit | `f715f31` |
 | 1 — Fondamentaux de GitHub Actions | Terminé | YAML ; workflow, job et step ; runner hébergé ; `name`, `on`, `jobs`, `runs-on`, `steps`, `run` et `uses` ; consultation des runs et logs | Approfondir les événements et expressions au module 2 | Workflow minimal, checkout, erreur YAML volontaire et réparation | `388bdeb`, `57cb448`, `fb3c2ae`, `c4e00cd` |
-| 2 à 16 | Non commencé | — | — | — | — |
+| 2 — Déclencheurs et expressions | Terminé | `push`, `pull_request`, `workflow_dispatch` ; filtres `branches` et `paths` ; expressions ; contexts `github`, `runner`, `env`, `steps` et `job` ; conditions ; codes de sortie | Revoir l’interaction entre filtres et checks obligatoires au module 5 | PR nº 1, déclenchements manuels, filtres, conditions et échecs volontaires | PR nº 1 ; `5cdf45c` ; `36b5717` |
+| 3 à 16 | Non commencé | — | — | — | — |
 
 ## Journal des séances
 
@@ -54,6 +55,18 @@ pour un projet combinant Rust et Python.
 - Erreur YAML volontaire détectée avant la création du runner.
 - Run invalide : `36280283993` ; run réparé : `36280711701`.
 
+### 2026-09-27 — Validation du module 2
+
+- Déclencheurs `push`, `pull_request` et `workflow_dispatch` pratiqués.
+- PR nº 1 créée, mise à jour automatiquement et fusionnée.
+- Filtres de branches et de chemins vérifiés par des runs réels.
+- Aucun run créé pour le commit documentaire `3e99840`.
+- Expressions et contexts GitHub Actions utilisés.
+- Step conditionnel observé en `skipped` puis en `success`.
+- Codes `exit 0` et `exit 1` observés.
+- Runs en échec : `36327319794` et `36329567933`.
+- Workflow restauré : run réussi `36329780200`.
+
 ## Questions en suspens
 
-- Aucune question en suspens pour le module 1.
+- Aucune question en suspens pour le module 2.
