@@ -12,7 +12,8 @@ pour un projet combinant Rust et Python.
 | Module | Statut | Notions maîtrisées | Notions à revoir | Exercice effectué | Commit ou PR |
 |---|---|---|---|---|---|
 | 0 — Diagnostic et préparation | Terminé | Git, GitHub et GitHub Actions ; environnement ; dépôt public ; identité Git ; working tree, index et commit ; `.gitignore` ; premier push | Approfondir la sécurité des secrets dans les modules suivants | Diagnostic de l’environnement, erreurs de `cd` et de heredoc, préparation du premier commit | `f715f31` |
-| 1 à 16 | Non commencé | — | — | — | — |
+| 1 — Fondamentaux de GitHub Actions | Terminé | YAML ; workflow, job et step ; runner hébergé ; `name`, `on`, `jobs`, `runs-on`, `steps`, `run` et `uses` ; consultation des runs et logs | Approfondir les événements et expressions au module 2 | Workflow minimal, checkout, erreur YAML volontaire et réparation | `388bdeb`, `57cb448`, `fb3c2ae`, `c4e00cd` |
+| 2 à 16 | Non commencé | — | — | — | — |
 
 ## Journal des séances
 
@@ -44,6 +45,15 @@ pour un projet combinant Rust et Python.
 - Le fonctionnement général du working tree, de l’index et des commits est compris.
 - En cas de secret exposé, la priorité est sa révocation ou sa rotation.
 
+### 2026-09-27 — Validation du module 1
+
+- Premier workflow déclenché par un `push`.
+- Runner Ubuntu hébergé observé dans les logs.
+- Différence comprise entre `run` et `uses`.
+- Action officielle `actions/checkout@v6` exécutée.
+- Erreur YAML volontaire détectée avant la création du runner.
+- Run invalide : `36280283993` ; run réparé : `36280711701`.
+
 ## Questions en suspens
 
-- Aucune question en suspens pour le module 0.
+- Aucune question en suspens pour le module 1.
