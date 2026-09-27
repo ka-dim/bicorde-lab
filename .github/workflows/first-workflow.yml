@@ -43,7 +43,7 @@ jobs:
 
       - name: Run exit-code probe
         id: exit_probe
-        run: exit 0
+        run: exit 1
 
       - name: Report execution status
         env:
