@@ -34,3 +34,7 @@ jobs:
       - name: Test Rust code
         working-directory: server
         run: cargo test --all-features
+
+      - name: Lint Rust code
+        working-directory: server
+        run: cargo clippy --all-targets --all-features -- -D warnings
