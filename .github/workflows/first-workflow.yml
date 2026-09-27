@@ -46,6 +46,7 @@ jobs:
         run: exit 1
 
       - name: Report execution status
+        if: ${{ always() }}
         env:
           PROBE_OUTCOME: ${{ steps.exit_probe.outcome }}
           CURRENT_JOB_STATUS: ${{ job.status }}
