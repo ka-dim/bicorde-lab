@@ -2,6 +2,7 @@ name: First workflow
 
 on:
   push:
+  pull_request:
   workflow_dispatch:
 
 jobs:
