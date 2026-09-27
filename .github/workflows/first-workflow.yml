@@ -41,5 +41,17 @@ jobs:
         if: ${{ github.event_name == env.MANUAL_EVENT }}
         run: echo "This workflow was started manually"
 
+      - name: Run exit-code probe
+        id: exit_probe
+        run: exit 0
+
+      - name: Report execution status
+        env:
+          PROBE_OUTCOME: ${{ steps.exit_probe.outcome }}
+          CURRENT_JOB_STATUS: ${{ job.status }}
+        run: |
+          echo "Probe outcome: $PROBE_OUTCOME"
+          echo "Job status: $CURRENT_JOB_STATUS"
+
       - name: Display a greeting
         run: echo "Hello from GitHub Actions"
