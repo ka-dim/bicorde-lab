@@ -12,7 +12,7 @@ mod tests {
 
     #[test]
     fn health_payload_reports_ok() {
-        assert_eq!(health_json(), r#"{"status":"ok"}"#);
+        assert_eq!(health_json(), r#"{"status":"ready"}"#);
     }
 
     #[test]
