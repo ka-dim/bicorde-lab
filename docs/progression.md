@@ -15,7 +15,8 @@ pour un projet combinant Rust et Python.
 | 1 — Fondamentaux de GitHub Actions | Terminé | YAML ; workflow, job et step ; runner hébergé ; `name`, `on`, `jobs`, `runs-on`, `steps`, `run` et `uses` ; consultation des runs et logs | Approfondir les événements et expressions au module 2 | Workflow minimal, checkout, erreur YAML volontaire et réparation | `388bdeb`, `57cb448`, `fb3c2ae`, `c4e00cd` |
 | 2 — Déclencheurs et expressions | Terminé | `push`, `pull_request`, `workflow_dispatch` ; filtres `branches` et `paths` ; expressions ; contexts `github`, `runner`, `env`, `steps` et `job` ; conditions ; codes de sortie | Revoir l’interaction entre filtres et checks obligatoires au module 5 | PR nº 1, déclenchements manuels, filtres, conditions et échecs volontaires | PR nº 1 ; `5cdf45c` ; `36b5717` |
 | 3 — CI Rust | Terminé | Package Rust ; `Cargo.lock` ; formatage ; tests ; Clippy ; build ; MSRV ; cache Cargo ; diagnostic des échecs | Approfondir les artifacts et les matrices dans les modules suivants | CI Rust complète, cache miss/hit, échecs volontaires de formatage, test et Clippy | `dd6e752`, `330f8d0`, `723ac3a`, `377c846` |
-| 4 à 16 | Non commencé | — | — | — | — |
+| 4 — CI Python | Terminé | Environnement virtuel ; dépendances figées ; pytest ; Ruff ; matrice Python 3.11/3.12 ; cache pip ; diagnostic d’installation | Approfondir le verrouillage avec empreintes et la construction du client HTTP | Package Python, quatre tests, matrice CI, cache miss/hit, test et dépendance en échec | `e24ec53`, `96a7926`, `a9f5ac3` |
+| 5 à 16 | Non commencé | — | — | — | — |
 
 ## Journal des séances
 
@@ -79,6 +80,18 @@ pour un projet combinant Rust et Python.
 - Échec Clippy diagnostiqué dans le run `36371090005`.
 - Workflow restauré avec succès dans le run `36371449778`.
 
+### 2026-09-28 — Validation du module 4
+
+- Environnement virtuel local créé et correctement ignoré par Git.
+- Dépendances de développement enregistrées avec des versions exactes.
+- Package `bicorde_client` créé avec quatre tests pytest.
+- Ruff utilisé pour le lint et la vérification du formatage.
+- Workflow `Python CI` exécuté avec Python 3.11 et Python 3.12.
+- Cache pip observé en sauvegarde puis en restauration sur les deux versions.
+- Test volontairement cassé dans le run `36494442533`.
+- Dépendance inexistante diagnostiquée dans le run `36495966515`.
+- Workflow restauré avec succès dans le run `36496214880`.
+
 ## Questions en suspens
 
-- Aucune question en suspens pour le module 3.
+- Aucune question en suspens pour le module 4.
