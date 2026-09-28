@@ -14,7 +14,8 @@ pour un projet combinant Rust et Python.
 | 0 — Diagnostic et préparation | Terminé | Git, GitHub et GitHub Actions ; environnement ; dépôt public ; identité Git ; working tree, index et commit ; `.gitignore` ; premier push | Approfondir la sécurité des secrets dans les modules suivants | Diagnostic de l’environnement, erreurs de `cd` et de heredoc, préparation du premier commit | `f715f31` |
 | 1 — Fondamentaux de GitHub Actions | Terminé | YAML ; workflow, job et step ; runner hébergé ; `name`, `on`, `jobs`, `runs-on`, `steps`, `run` et `uses` ; consultation des runs et logs | Approfondir les événements et expressions au module 2 | Workflow minimal, checkout, erreur YAML volontaire et réparation | `388bdeb`, `57cb448`, `fb3c2ae`, `c4e00cd` |
 | 2 — Déclencheurs et expressions | Terminé | `push`, `pull_request`, `workflow_dispatch` ; filtres `branches` et `paths` ; expressions ; contexts `github`, `runner`, `env`, `steps` et `job` ; conditions ; codes de sortie | Revoir l’interaction entre filtres et checks obligatoires au module 5 | PR nº 1, déclenchements manuels, filtres, conditions et échecs volontaires | PR nº 1 ; `5cdf45c` ; `36b5717` |
-| 3 à 16 | Non commencé | — | — | — | — |
+| 3 — CI Rust | Terminé | Package Rust ; `Cargo.lock` ; formatage ; tests ; Clippy ; build ; MSRV ; cache Cargo ; diagnostic des échecs | Approfondir les artifacts et les matrices dans les modules suivants | CI Rust complète, cache miss/hit, échecs volontaires de formatage, test et Clippy | `dd6e752`, `330f8d0`, `723ac3a`, `377c846` |
+| 4 à 16 | Non commencé | — | — | — | — |
 
 ## Journal des séances
 
@@ -67,6 +68,17 @@ pour un projet combinant Rust et Python.
 - Runs en échec : `36327319794` et `36329567933`.
 - Workflow restauré : run réussi `36329780200`.
 
+### 2026-09-28 — Validation du module 3
+
+- Package Rust créé avec une bibliothèque, un binaire et deux tests unitaires.
+- Vérifications locales pratiquées avec `cargo fmt`, `cargo test`, `cargo clippy`, `cargo check` et `cargo build`.
+- Workflow `Rust CI` créé avec des jobs indépendants pour les contrôles courants et la MSRV 1.85.
+- Cache Cargo observé en cache miss, sauvegardé, puis restauré avec un cache hit.
+- Échec de formatage diagnostiqué dans le run `36366553095`.
+- Échec de test unitaire diagnostiqué dans le run `36367412689`.
+- Échec Clippy diagnostiqué dans le run `36371090005`.
+- Workflow restauré avec succès dans le run `36371449778`.
+
 ## Questions en suspens
 
-- Aucune question en suspens pour le module 2.
+- Aucune question en suspens pour le module 3.
