@@ -2,7 +2,7 @@ from bicorde_client import health_is_ok, version_is_valid
 
 
 def test_health_accepts_ok_status() -> None:
-    assert health_is_ok({"status": "ok"})
+    assert health_is_ok({"status": "ready"})
 
 
 def test_health_rejects_other_status() -> None:
