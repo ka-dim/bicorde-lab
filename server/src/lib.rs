@@ -1,5 +1,5 @@
 pub fn health_json() -> &'static str {
-    return r#"{"status":"ok"}"#;
+    r#"{"status":"ok"}"#
 }
 
 pub fn version_json() -> String {
