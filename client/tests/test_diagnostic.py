@@ -15,3 +15,7 @@ def test_version_accepts_non_empty_string() -> None:
 
 def test_version_rejects_empty_string() -> None:
     assert not version_is_valid({"version": "  "})
+
+
+def test_health_rejects_missing_status() -> None:
+    assert not health_is_ok({})
