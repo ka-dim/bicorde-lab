@@ -10,9 +10,6 @@ on:
   pull_request:
     branches:
       - main
-    paths:
-      - "server/**"
-      - ".github/workflows/rust-ci.yml"
   workflow_dispatch:
 
 jobs:
