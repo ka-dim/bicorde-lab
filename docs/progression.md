@@ -16,7 +16,8 @@ pour un projet combinant Rust et Python.
 | 2 — Déclencheurs et expressions | Terminé | `push`, `pull_request`, `workflow_dispatch` ; filtres `branches` et `paths` ; expressions ; contexts `github`, `runner`, `env`, `steps` et `job` ; conditions ; codes de sortie | Revoir l’interaction entre filtres et checks obligatoires au module 5 | PR nº 1, déclenchements manuels, filtres, conditions et échecs volontaires | PR nº 1 ; `5cdf45c` ; `36b5717` |
 | 3 — CI Rust | Terminé | Package Rust ; `Cargo.lock` ; formatage ; tests ; Clippy ; build ; MSRV ; cache Cargo ; diagnostic des échecs | Approfondir les artifacts et les matrices dans les modules suivants | CI Rust complète, cache miss/hit, échecs volontaires de formatage, test et Clippy | `dd6e752`, `330f8d0`, `723ac3a`, `377c846` |
 | 4 — CI Python | Terminé | Environnement virtuel ; dépendances figées ; pytest ; Ruff ; matrice Python 3.11/3.12 ; cache pip ; diagnostic d’installation | Approfondir le verrouillage avec empreintes et la construction du client HTTP | Package Python, quatre tests, matrice CI, cache miss/hit, test et dépendance en échec | `e24ec53`, `96a7926`, `a9f5ac3` |
-| 5 à 16 | Non commencé | — | — | — | — |
+| 5 — Pull requests et protections | Terminé | Branches de fonctionnalité ; pull requests ; checks obligatoires ; squash merge ; protection de `main` ; résolution locale de conflits | Approfondir les reviews avec plusieurs contributeurs | PR réelles, protection de branche, conflit volontaire et résolution sans perte | PR nº 2 à 5 ; `7f8c107`, `f9a4f6f`, `a451e31`, `429137c` |
+| 6 à 16 | Non commencé | — | — | — | — |
 
 ## Journal des séances
 
@@ -92,6 +93,21 @@ pour un projet combinant Rust et Python.
 - Dépendance inexistante diagnostiquée dans le run `36495966515`.
 - Workflow restauré avec succès dans le run `36496214880`.
 
+### 2026-10-02 — Validation du module 5
+
+- PR nº 2 créée depuis une branche de fonctionnalité et fusionnée par squash.
+- Squash merge choisi comme seule méthode de fusion du dépôt.
+- Suppression automatique des branches distantes fusionnées activée.
+- Branche `main` protégée et règles appliquées aux administrateurs.
+- Passage par une pull request imposé avec zéro approbation pour le travail solo.
+- Checks Python 3.11, Python 3.12, Rust et MSRV rendus obligatoires.
+- Force push et suppression de `main` interdits.
+- Historique linéaire et résolution des conversations imposés.
+- Filtres de chemins retirés des événements `pull_request` pour garantir la création des checks obligatoires.
+- Deux branches concurrentes créées depuis le même commit.
+- Conflit réel observé dans la PR nº 5 puis résolu localement sans perdre les deux intentions.
+- PR nº 3, nº 4 et nº 5 fusionnées par squash.
+
 ## Questions en suspens
 
-- Aucune question en suspens pour le module 4.
+- Aucune question en suspens pour le module 5.
