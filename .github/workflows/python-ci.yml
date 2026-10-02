@@ -10,9 +10,6 @@ on:
   pull_request:
     branches:
       - main
-    paths:
-      - "client/**"
-      - ".github/workflows/python-ci.yml"
   workflow_dispatch:
 
 permissions:
