@@ -41,6 +41,6 @@ bicorde-lab/
 
 ## Progression
 
-Le projet se trouve actuellement au module 0 : diagnostic et préparation.
+Les modules 0 à 4 sont terminés et documentés.
 
 Le suivi détaillé est disponible dans [`docs/progression.md`](docs/progression.md).
