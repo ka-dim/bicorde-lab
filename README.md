@@ -41,6 +41,7 @@ bicorde-lab/
 
 ## Progression
 
+Les modules 0 à 4 sont terminés et documentés.
 Le projet se trouve actuellement au module 5 : pull requests et protections.
 
 Le suivi détaillé est disponible dans [`docs/progression.md`](docs/progression.md).
