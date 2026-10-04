@@ -17,7 +17,8 @@ pour un projet combinant Rust et Python.
 | 3 — CI Rust | Terminé | Package Rust ; `Cargo.lock` ; formatage ; tests ; Clippy ; build ; MSRV ; cache Cargo ; diagnostic des échecs | Approfondir les artifacts et les matrices dans les modules suivants | CI Rust complète, cache miss/hit, échecs volontaires de formatage, test et Clippy | `dd6e752`, `330f8d0`, `723ac3a`, `377c846` |
 | 4 — CI Python | Terminé | Environnement virtuel ; dépendances figées ; pytest ; Ruff ; matrice Python 3.11/3.12 ; cache pip ; diagnostic d’installation | Approfondir le verrouillage avec empreintes et la construction du client HTTP | Package Python, quatre tests, matrice CI, cache miss/hit, test et dépendance en échec | `e24ec53`, `96a7926`, `a9f5ac3` |
 | 5 — Pull requests et protections | Terminé | Branches de fonctionnalité ; pull requests ; checks obligatoires ; squash merge ; protection de `main` ; résolution locale de conflits | Approfondir les reviews avec plusieurs contributeurs | PR réelles, protection de branche, conflit volontaire et résolution sans perte | PR nº 2 à 5 ; `7f8c107`, `f9a4f6f`, `a451e31`, `429137c` |
-| 6 à 16 | Non commencé | — | — | — | — |
+| 6 — Artifacts et dépendances entre jobs | Terminé | Isolation des runners ; `needs` ; upload et download d’artifacts ; intégrité SHA-256 ; builds debug et release ; compatibilité des binaires ; rétention | Approfondir les artifacts multiplateformes et les GitHub Releases | Binaire Rust transmis entre deux jobs, téléchargé localement et vérifié sur un runner indépendant | PR nº 7 ; `3b79afa` |
+| 7 à 16 | Non commencé | — | — | — | — |
 
 ## Journal des séances
 
@@ -108,6 +109,21 @@ pour un projet combinant Rust et Python.
 - Conflit réel observé dans la PR nº 5 puis résolu localement sans perdre les deux intentions.
 - PR nº 3, nº 4 et nº 5 fusionnées par squash.
 
+### 2026-10-04 — Validation du module 6
+
+- Isolation des systèmes de fichiers entre deux jobs observée.
+- Binaire Rust construit puis publié avec `actions/upload-artifact`.
+- Job indépendant relié avec `needs` et utilisant `actions/download-artifact`.
+- Intégrité du transfert confirmée par une empreinte SHA-256 identique.
+- Artifact téléchargé localement et identifié comme un exécutable ELF Linux x86-64.
+- Incompatibilité entre le binaire Linux x86-64 et macOS ARM64 comprise.
+- Différences entre les profils Cargo `debug` et `release` observées.
+- Artifact optimisé `server-linux-x86_64-release` produit.
+- Artifacts de plusieurs runs observés avec des identifiants distincts.
+- Durée de conservation limitée à 14 jours.
+- Job `Verify Rust artifact` ajouté aux checks obligatoires de `main`.
+- PR nº 7 fusionnée par squash dans le commit `3b79afa`.
+
 ## Questions en suspens
 
-- Aucune question en suspens pour le module 5.
+- Aucune question en suspens pour le module 6.
