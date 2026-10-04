@@ -47,15 +47,15 @@ jobs:
         working-directory: server
         run: cargo clippy --all-targets --all-features -- -D warnings
 
-      - name: Build Rust binary
+      - name: Build Rust release binary
         working-directory: server
-        run: cargo build --all-features
+        run: cargo build --release --all-features
 
       - name: Upload Rust binary
         uses: actions/upload-artifact@v7
         with:
-          name: server-linux-debug
-          path: server/target/debug/server
+          name: server-linux-x86_64-release
+          path: server/target/release/server
           if-no-files-found: error
 
   msrv:
@@ -86,7 +86,7 @@ jobs:
       - name: Download Rust binary
         uses: actions/download-artifact@v8
         with:
-          name: server-linux-debug
+          name: server-linux-x86_64-release
           path: downloaded-server
 
       - name: Display downloaded files
