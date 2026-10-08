@@ -41,7 +41,7 @@ bicorde-lab/
 
 ## Progression
 
-Les modules 0 à 6 sont terminés et documentés.
-Le prochain module à commencer est le module 7.
+Les modules 0 à 7 sont terminés et documentés.
+Le prochain module à commencer est le module 8.
 
 Le suivi détaillé est disponible dans [`docs/progression.md`](docs/progression.md).
