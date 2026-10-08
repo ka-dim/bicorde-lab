@@ -130,7 +130,7 @@ jobs:
 
           - os: windows-latest
             platform: windows-x86_64
-            binary: server.exe
+            binary: missing-server.exe
 
     steps:
       - name: Check out repository
