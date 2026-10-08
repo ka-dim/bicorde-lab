@@ -47,18 +47,6 @@ jobs:
         working-directory: server
         run: cargo clippy --all-targets --all-features -- -D warnings
 
-      - name: Build Rust release binary
-        working-directory: server
-        run: cargo build --release --all-features
-
-      - name: Upload Rust binary
-        uses: actions/upload-artifact@v7
-        with:
-          name: server-linux-x86_64-release
-          path: server/target/release/server
-          if-no-files-found: error
-          retention-days: 14
-
   msrv:
     name: Rust 1.85 MSRV
     runs-on: ubuntu-latest
@@ -81,7 +69,7 @@ jobs:
     name: Verify Rust artifact
     runs-on: ubuntu-latest
     needs:
-      - checks
+      - package
 
     steps:
       - name: Download Rust binary
@@ -98,3 +86,40 @@ jobs:
 
       - name: Run downloaded binary
         run: downloaded-server/server
+
+  package:
+    name: Rust package (${{ matrix.platform }})
+    needs:
+      - checks
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            platform: linux-x86_64
+            binary: server
+
+          - os: windows-latest
+            platform: windows-x86_64
+            binary: server.exe
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Display Rust version
+        run: rustc --version
+
+      - name: Build release binary
+        working-directory: server
+        run: cargo build --release --all-features
+
+      - name: Upload release binary
+        uses: actions/upload-artifact@v7
+        with:
+          name: server-${{ matrix.platform }}-release
+          path: server/target/release/${{ matrix.binary }}
+          if-no-files-found: error
+          retention-days: 14
