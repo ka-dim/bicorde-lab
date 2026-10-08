@@ -66,26 +66,53 @@ jobs:
         run: cargo +1.85.0 check --all-targets --all-features --locked
 
   verify_artifact:
-    name: Verify Rust artifact
-    runs-on: ubuntu-latest
+    name: Verify Rust artifact (${{ matrix.platform }})
     needs:
       - package
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            platform: linux-x86_64
+            binary: server
+            is_windows: false
+
+          - os: windows-latest
+            platform: windows-x86_64
+            binary: server.exe
+            is_windows: true
 
     steps:
-      - name: Download Rust binary
+      - name: Download release binary
         uses: actions/download-artifact@v8
         with:
-          name: server-linux-x86_64-release
+          name: server-${{ matrix.platform }}-release
           path: downloaded-server
 
-      - name: Display downloaded files
+      - name: Display Linux artifact
+        if: ${{ !matrix.is_windows }}
         run: ls -lh downloaded-server
 
-      - name: Make binary executable
+      - name: Make Linux binary executable
+        if: ${{ !matrix.is_windows }}
         run: chmod +x downloaded-server/server
 
-      - name: Run downloaded binary
+      - name: Run Linux binary
+        if: ${{ !matrix.is_windows }}
         run: downloaded-server/server
+
+      - name: Display Windows artifact
+        if: matrix.is_windows
+        shell: pwsh
+        run: Get-ChildItem downloaded-server
+
+      - name: Run Windows binary
+        if: matrix.is_windows
+        shell: pwsh
+        run: .\downloaded-server\server.exe
 
   package:
     name: Rust package (${{ matrix.platform }})
