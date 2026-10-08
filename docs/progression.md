@@ -18,7 +18,8 @@ pour un projet combinant Rust et Python.
 | 4 — CI Python | Terminé | Environnement virtuel ; dépendances figées ; pytest ; Ruff ; matrice Python 3.11/3.12 ; cache pip ; diagnostic d’installation | Approfondir le verrouillage avec empreintes et la construction du client HTTP | Package Python, quatre tests, matrice CI, cache miss/hit, test et dépendance en échec | `e24ec53`, `96a7926`, `a9f5ac3` |
 | 5 — Pull requests et protections | Terminé | Branches de fonctionnalité ; pull requests ; checks obligatoires ; squash merge ; protection de `main` ; résolution locale de conflits | Approfondir les reviews avec plusieurs contributeurs | PR réelles, protection de branche, conflit volontaire et résolution sans perte | PR nº 2 à 5 ; `7f8c107`, `f9a4f6f`, `a451e31`, `429137c` |
 | 6 — Artifacts et dépendances entre jobs | Terminé | Isolation des runners ; `needs` ; upload et download d’artifacts ; intégrité SHA-256 ; builds debug et release ; compatibilité des binaires ; rétention | Approfondir les artifacts multiplateformes et les GitHub Releases | Binaire Rust transmis entre deux jobs, téléchargé localement et vérifié sur un runner indépendant | PR nº 7 ; `3b79afa` |
-| 7 à 16 | Non commencé | — | — | — | — |
+| 7 — Matrice Rust multiplateforme | Terminé | Matrices avec `include` ; `fail-fast` ; runners Linux et Windows ; binaires ELF et PE ; artifacts spécifiques aux plateformes ; steps conditionnels ; dépendances entre matrices | Approfondir les chaînes de jobs indépendantes par plateforme | Builds et vérifications Linux x86-64 et Windows x86-64, avec échec Windows volontaire | PR nº 9 ; `21e3b77` |
+| 8 à 16 | Non commencé | — | — | — | — |
 
 ## Journal des séances
 
@@ -124,6 +125,21 @@ pour un projet combinant Rust et Python.
 - Job `Verify Rust artifact` ajouté aux checks obligatoires de `main`.
 - PR nº 7 fusionnée par squash dans le commit `3b79afa`.
 
+### 2026-10-08 — Validation du module 7
+
+- Matrice Rust créée avec deux associations explicites grâce à `include`.
+- Binaire Linux `server` construit sur `ubuntu-latest`.
+- Binaire Windows `server.exe` construit sur `windows-latest`.
+- Artifacts Linux et Windows publiés avec des noms distincts.
+- Matrice de vérification exécutant chaque binaire sur son système correspondant.
+- Steps Linux et Windows sélectionnés par des conditions.
+- Différence entre `include` et un produit cartésien comprise.
+- Comportement de `fail-fast: false` observé avec un échec Windows volontaire.
+- Dépendance globale envers un job matriciel observée avant expansion de la matrice suivante.
+- Checks de packaging et de vérification rendus obligatoires pour les deux plateformes.
+- `actions/cache` mise à jour vers la version utilisant Node.js 24.
+- PR nº 9 fusionnée par squash dans le commit `21e3b77`.
+
 ## Questions en suspens
 
-- Aucune question en suspens pour le module 6.
+- Aucune question en suspens pour le module 7.
