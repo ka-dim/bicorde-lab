@@ -19,7 +19,8 @@ pour un projet combinant Rust et Python.
 | 5 — Pull requests et protections | Terminé | Branches de fonctionnalité ; pull requests ; checks obligatoires ; squash merge ; protection de `main` ; résolution locale de conflits | Approfondir les reviews avec plusieurs contributeurs | PR réelles, protection de branche, conflit volontaire et résolution sans perte | PR nº 2 à 5 ; `7f8c107`, `f9a4f6f`, `a451e31`, `429137c` |
 | 6 — Artifacts et dépendances entre jobs | Terminé | Isolation des runners ; `needs` ; upload et download d’artifacts ; intégrité SHA-256 ; builds debug et release ; compatibilité des binaires ; rétention | Approfondir les artifacts multiplateformes et les GitHub Releases | Binaire Rust transmis entre deux jobs, téléchargé localement et vérifié sur un runner indépendant | PR nº 7 ; `3b79afa` |
 | 7 — Matrice Rust multiplateforme | Terminé | Matrices avec `include` ; `fail-fast` ; runners Linux et Windows ; binaires ELF et PE ; artifacts spécifiques aux plateformes ; steps conditionnels ; dépendances entre matrices | Approfondir les chaînes de jobs indépendantes par plateforme | Builds et vérifications Linux x86-64 et Windows x86-64, avec échec Windows volontaire | PR nº 9 ; `21e3b77` |
-| 8 à 16 | Non commencé | — | — | — | — |
+| 8 — Serveur HTTP et intégration Rust-Python | Terminé | Axum ; Tokio ; routes HTTP ; réponses JSON ; tests directs du routeur ; client Python HTTP ; processus en arrière-plan ; attente de disponibilité ; nettoyage ; test d’intégration | Approfondir la configuration réseau, les timeouts et les tests d’échec en CI | Serveur Rust interrogé par un client Python dans un job GitHub Actions avec vérifications Linux et Windows | PR nº 11 ; `6b93bc3` |
+| 9 à 16 | Non commencé | — | — | — | — |
 
 ## Journal des séances
 
@@ -140,6 +141,23 @@ pour un projet combinant Rust et Python.
 - `actions/cache` mise à jour vers la version utilisant Node.js 24.
 - PR nº 9 fusionnée par squash dans le commit `21e3b77`.
 
+### 2026-10-12 — Validation du module 8
+
+- Binaire Rust transformé en serveur HTTP avec Axum et Tokio.
+- Routes `/`, `/health` et `/version` créées.
+- Réponses JSON sérialisées avec Serde.
+- Serveur lié à `127.0.0.1:3000` grâce à `TcpListener`.
+- Routes testées directement avec `Router::oneshot` sans ouvrir de port.
+- Client Python HTTP créé avec la bibliothèque standard `urllib`.
+- Codes de sortie `0` et `1` observés selon la disponibilité du serveur.
+- Différence comprise entre tests de route et test d’intégration réseau.
+- Artifact Linux démarré en arrière-plan dans GitHub Actions.
+- Disponibilité du serveur vérifiée avec une boucle sur `/health`.
+- Nettoyage garanti avec `trap` sous Linux et `finally` sous Windows.
+- Artifacts Linux et Windows adaptés au comportement persistant du serveur.
+- Job `Rust-Python integration` ajouté au workflow et aux checks obligatoires.
+- PR nº 11 fusionnée par squash dans le commit `6b93bc3`.
+
 ## Questions en suspens
 
-- Aucune question en suspens pour le module 7.
+- Aucune question en suspens pour le module 8.
