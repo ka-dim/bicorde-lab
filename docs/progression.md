@@ -20,7 +20,8 @@ pour un projet combinant Rust et Python.
 | 6 — Artifacts et dépendances entre jobs | Terminé | Isolation des runners ; `needs` ; upload et download d’artifacts ; intégrité SHA-256 ; builds debug et release ; compatibilité des binaires ; rétention | Approfondir les artifacts multiplateformes et les GitHub Releases | Binaire Rust transmis entre deux jobs, téléchargé localement et vérifié sur un runner indépendant | PR nº 7 ; `3b79afa` |
 | 7 — Matrice Rust multiplateforme | Terminé | Matrices avec `include` ; `fail-fast` ; runners Linux et Windows ; binaires ELF et PE ; artifacts spécifiques aux plateformes ; steps conditionnels ; dépendances entre matrices | Approfondir les chaînes de jobs indépendantes par plateforme | Builds et vérifications Linux x86-64 et Windows x86-64, avec échec Windows volontaire | PR nº 9 ; `21e3b77` |
 | 8 — Serveur HTTP et intégration Rust-Python | Terminé | Axum ; Tokio ; routes HTTP ; réponses JSON ; tests directs du routeur ; client Python HTTP ; processus en arrière-plan ; attente de disponibilité ; nettoyage ; test d’intégration | Approfondir la configuration réseau, les timeouts et les tests d’échec en CI | Serveur Rust interrogé par un client Python dans un job GitHub Actions avec vérifications Linux et Windows | PR nº 11 ; `6b93bc3` |
-| 9 à 16 | Non commencé | — | — | — | — |
+| 9 — Docker et configuration réseau | Terminé | Adresse configurable ; image et conteneur ; build multi-stage ; contexte Docker ; publication de ports ; interfaces réseau ; utilisateur non administrateur ; intégration Docker en CI | Approfondir le cache de build et la publication des images | Image construite localement et en CI, diagnostic Python, comparaison des écoutes réseau | PR nº 13 ; `0eff02d` |
+| 10 à 16 | Non commencé | — | — | — | — |
 
 ## Journal des séances
 
@@ -158,6 +159,24 @@ pour un projet combinant Rust et Python.
 - Job `Rust-Python integration` ajouté au workflow et aux checks obligatoires.
 - PR nº 11 fusionnée par squash dans le commit `6b93bc3`.
 
+### 2026-10-16 — Validation du module 9
+
+- Adresse du serveur configurable avec `BICORDE_ADDRESS`.
+- Port personnalisé vérifié avec le client Python.
+- Dockerfile multi-stage créé avec compilation Rust puis image Debian légère.
+- Binaire exécuté avec un utilisateur non administrateur.
+- Contexte de construction limité avec `.dockerignore`.
+- Image Docker construite et conteneur testé localement.
+- Publication du port 3002 du Mac vers le port 3000 du conteneur.
+- Différence entre écoute sur `127.0.0.1` et `0.0.0.0` observée.
+- Distinction entre image et conteneur comprise.
+- Lenteur réseau lors du téléchargement Cargo diagnostiquée.
+- Workflow Docker créé avec attente de disponibilité et nettoyage automatique.
+- Diagnostic Python réussi dans le run `38820662160`.
+- Check `Docker integration` ajouté aux dix checks obligatoires.
+- PR nº 13 fusionnée par squash dans le commit `0eff02d`.
+- Amélioration des erreurs réseau du client Python reportée.
+
 ## Questions en suspens
 
-- Aucune question en suspens pour le module 8.
+- Amélioration à reprendre : présenter un message court pour `RemoteDisconnected` dans le client Python.
