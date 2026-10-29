@@ -42,6 +42,8 @@ bicorde-lab/
 ## Progression
 
 Les modules 0 à 9 sont terminés et documentés.
-Le prochain module à commencer est le module 10.
+Le prochain module à commencer est le module 10 : révision générale et compléments.
 
 Le suivi détaillé est disponible dans [`docs/progression.md`](docs/progression.md).
+Le programme de référence, révisé le 16 octobre 2026, est disponible dans
+[`docs/programme.md`](docs/programme.md). Il comprend 18 modules numérotés de 0 à 17.
