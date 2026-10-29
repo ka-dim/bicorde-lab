@@ -1,0 +1,35 @@
+name: Outputs lab
+
+on:
+  push:
+    branches:
+      - ci/module-10-outputs
+    paths:
+      - ".github/workflows/outputs-lab.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  experiment:
+    name: Step boundaries
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Define variable and create file
+        shell: bash
+        run: |
+          VERSION="0.1.0"
+
+          echo "First step: VERSION=$VERSION"
+
+          printf '%s\n' "$VERSION" > version.txt
+
+      - name: Inspect variable and file
+        shell: bash
+        run: |
+          echo "Second step: VERSION=${VERSION:-undefined}"
+
+          echo "File content:"
+          cat version.txt
