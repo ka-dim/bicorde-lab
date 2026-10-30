@@ -24,6 +24,12 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v7
 
+      - name: Simulate preparation failure
+        shell: bash
+        run: |
+          echo "Intentional failure before version preparation"
+          exit 1
+
       - name: Define variable and create file
         id: prepare
         shell: bash
