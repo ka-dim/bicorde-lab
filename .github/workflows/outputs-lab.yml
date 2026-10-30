@@ -25,6 +25,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Simulate preparation failure
+        continue-on-error: true
         shell: bash
         run: |
           echo "Intentional failure before version preparation"
