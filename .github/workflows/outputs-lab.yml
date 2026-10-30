@@ -42,6 +42,14 @@ jobs:
           echo "Raw step result: $RAW_RESULT"
           echo "Final step result: $FINAL_RESULT"
 
+      - name: Simulate a slow operation
+        timeout-minutes: 1
+        shell: bash
+        run: |
+          echo "Starting an operation expected to exceed its timeout"
+          sleep 90
+          echo "Operation completed"
+
       - name: Define variable and create file
         id: prepare
         shell: bash
