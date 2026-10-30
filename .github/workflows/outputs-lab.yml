@@ -57,7 +57,7 @@ jobs:
       - name: Display received version
         shell: bash
         env:
-          RECEIVED_VERSION: ${{ needs.experiment.outputs.versoin }}
+          RECEIVED_VERSION: ${{ needs.experiment.outputs.version }}
         run: |
           : "${RECEIVED_VERSION:?Missing version output}"
 
