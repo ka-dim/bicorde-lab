@@ -26,6 +26,8 @@ jobs:
 
           printf '%s\n' "$VERSION" > version.txt
 
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+
       - name: Inspect variable and file
         shell: bash
         run: |
