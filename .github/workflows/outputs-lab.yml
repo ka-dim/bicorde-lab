@@ -127,3 +127,13 @@ jobs:
           echo "Consumer: $CONSUMER_RESULT"
           echo "Version: ${PROJECT_VERSION:-unavailable}"
           echo "Simulated step outcome: ${SIMULATED_OUTCOME:-unavailable}"
+          {
+            echo "## Bilan du laboratoire"
+            echo ""
+            echo "| Élément | Résultat |"
+            echo "|---|---|"
+            echo "| Experiment | $EXPERIMENT_RESULT |"
+            echo "| Consumer | $CONSUMER_RESULT |"
+            echo "| Version | ${PROJECT_VERSION:-unavailable} |"
+            echo "| Échec simulé — résultat brut | ${SIMULATED_OUTCOME:-unavailable} |"
+          } >> "$GITHUB_STEP_SUMMARY"
