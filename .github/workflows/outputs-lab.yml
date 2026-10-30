@@ -6,6 +6,8 @@ on:
       - ci/module-10-outputs
     paths:
       - ".github/workflows/outputs-lab.yml"
+      - "server/Cargo.toml"
+      - "server/Cargo.lock"
   workflow_dispatch:
 
 permissions:
