@@ -15,6 +15,8 @@ jobs:
   experiment:
     name: Step boundaries
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.prepare.outputs.version }}
 
     steps:
       - name: Define variable and create file
@@ -45,3 +47,16 @@ jobs:
           PREPARED_VERSION: ${{ steps.prepare.outputs.version }}
         run: |
           echo "Step output: $PREPARED_VERSION"
+
+  consumer:
+    name: Read job output
+    needs: experiment
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Display received version
+        shell: bash
+        env:
+          RECEIVED_VERSION: ${{ needs.experiment.outputs.version }}
+        run: |
+          echo "Job output: $RECEIVED_VERSION"
