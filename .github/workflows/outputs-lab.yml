@@ -19,6 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.prepare.outputs.version }}
+      simulated_outcome: ${{ steps.simulated_failure.outcome }}
 
     steps:
       - name: Check out repository
@@ -111,8 +112,10 @@ jobs:
           EXPERIMENT_RESULT: ${{ needs.experiment.result }}
           CONSUMER_RESULT: ${{ needs.consumer.result }}
           PROJECT_VERSION: ${{ needs.experiment.outputs.version }}
+          SIMULATED_OUTCOME: ${{ needs.experiment.outputs.simulated_outcome }}
         run: |
           echo "Workflow report"
           echo "Experiment: $EXPERIMENT_RESULT"
           echo "Consumer: $CONSUMER_RESULT"
           echo "Version: ${PROJECT_VERSION:-unavailable}"
+          echo "Simulated step outcome: ${SIMULATED_OUTCOME:-unavailable}"
