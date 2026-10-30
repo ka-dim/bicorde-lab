@@ -18,6 +18,7 @@ jobs:
 
     steps:
       - name: Define variable and create file
+        id: prepare
         shell: bash
         run: |
           VERSION="0.1.0"
@@ -28,6 +29,8 @@ jobs:
 
           echo "VERSION=$VERSION" >> "$GITHUB_ENV"
 
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
       - name: Inspect variable and file
         shell: bash
         run: |
@@ -35,3 +38,10 @@ jobs:
 
           echo "File content:"
           cat version.txt
+
+      - name: Read step output
+        shell: bash
+        env:
+          PREPARED_VERSION: ${{ steps.prepare.outputs.version }}
+        run: |
+          echo "Step output: $PREPARED_VERSION"
