@@ -78,3 +78,24 @@ jobs:
           : "${RECEIVED_VERSION:?Missing version output}"
 
           echo "Job output: $RECEIVED_VERSION"
+
+  report:
+    name: Workflow report
+    needs:
+      - experiment
+      - consumer
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Display workflow results
+        shell: bash
+        env:
+          EXPERIMENT_RESULT: ${{ needs.experiment.result }}
+          CONSUMER_RESULT: ${{ needs.consumer.result }}
+          PROJECT_VERSION: ${{ needs.experiment.outputs.version }}
+        run: |
+          echo "Workflow report"
+          echo "Experiment: $EXPERIMENT_RESULT"
+          echo "Consumer: $CONSUMER_RESULT"
+          echo "Version: ${PROJECT_VERSION:-unavailable}"
