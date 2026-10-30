@@ -19,11 +19,25 @@ jobs:
       version: ${{ steps.prepare.outputs.version }}
 
     steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
       - name: Define variable and create file
         id: prepare
         shell: bash
         run: |
-          VERSION="0.1.0"
+          set -euo pipefail
+
+          VERSION="$(
+            cargo metadata \
+              --manifest-path server/Cargo.toml \
+              --no-deps \
+              --format-version 1 \
+              --locked |
+            jq -er '.packages[] | select(.name == "server") | .version'
+          )"
+
+          : "${VERSION:?Missing Cargo package version}"
 
           echo "First step: VERSION=$VERSION"
 
