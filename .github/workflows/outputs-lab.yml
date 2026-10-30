@@ -46,8 +46,8 @@ jobs:
         timeout-minutes: 1
         shell: bash
         run: |
-          echo "Starting an operation expected to exceed its timeout"
-          sleep 90
+          echo "Starting an operation within its timeout"
+          sleep 2
           echo "Operation completed"
 
       - name: Define variable and create file
