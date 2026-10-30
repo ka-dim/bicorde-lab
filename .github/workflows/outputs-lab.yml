@@ -25,11 +25,21 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Simulate preparation failure
+        id: simulated_failure
         continue-on-error: true
         shell: bash
         run: |
           echo "Intentional failure before version preparation"
           exit 1
+
+      - name: Inspect tolerated failure
+        shell: bash
+        env:
+          RAW_RESULT: ${{ steps.simulated_failure.outcome }}
+          FINAL_RESULT: ${{ steps.simulated_failure.conclusion }}
+        run: |
+          echo "Raw step result: $RAW_RESULT"
+          echo "Final step result: $FINAL_RESULT"
 
       - name: Define variable and create file
         id: prepare
