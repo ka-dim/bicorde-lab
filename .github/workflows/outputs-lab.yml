@@ -119,9 +119,22 @@ jobs:
         run: cargo test --all-features --locked
 
   python_checks:
-    name: Lab Python tests
-    runs-on: ubuntu-latest
+    name: Lab Python tests (${{ matrix.os }}, Python ${{ matrix.python-version }})
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 5
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+        python-version:
+          - "3.11"
+          - "3.12"
+        exclude:
+          - os: windows-latest
+            python-version: "3.11"
 
     steps:
       - name: Check out repository
@@ -130,7 +143,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
-          python-version: "3.12"
+          python-version: ${{ matrix.python-version }}
 
       - name: Install dependencies
         working-directory: client
