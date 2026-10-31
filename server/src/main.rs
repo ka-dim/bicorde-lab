@@ -11,6 +11,17 @@ async fn main() {
     println!("Listening on http://{address}");
 
     axum::serve(listener, server::app())
+        .with_graceful_shutdown(shutdown_signal())
         .await
         .expect("HTTP server failed");
+
+    println!("HTTP server stopped cleanly");
+}
+
+async fn shutdown_signal() {
+    tokio::signal::ctrl_c()
+        .await
+        .expect("Failed to listen for Ctrl+C");
+
+    println!("Shutdown requested; finishing active requests");
 }

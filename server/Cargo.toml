@@ -7,7 +7,7 @@ rust-version = "1.85"
 [dependencies]
 axum = "0.8"
 serde = { version = "1", features = ["derive"] }
-tokio = { version = "1", features = ["macros", "rt-multi-thread", "net"] }
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "net", "signal"] }
 
 [dev-dependencies]
 tower = { version = "0.5", features = ["util"] }
