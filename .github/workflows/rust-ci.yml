@@ -87,6 +87,16 @@ jobs:
             is_windows: true
 
     steps:
+      - name: Check out diagnostic client
+        if: matrix.is_windows
+        uses: actions/checkout@v7
+
+      - name: Set up Python for Windows diagnostic
+        if: matrix.is_windows
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
       - name: Download release binary
         uses: actions/download-artifact@v8
         with:
@@ -203,6 +213,16 @@ jobs:
             $versionResponse |
               ConvertTo-Json -Compress |
               Write-Output
+
+            $env:PYTHONPATH = Join-Path `
+              $env:GITHUB_WORKSPACE `
+              "client/src"
+
+            python -m bicorde_client http://127.0.0.1:3000
+
+            if ($LASTEXITCODE -ne 0) {
+              throw "The Python diagnostic failed against the Windows server."
+            }
           }
           finally {
             if (-not $process.HasExited) {
