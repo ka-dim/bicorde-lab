@@ -105,11 +105,48 @@ jobs:
 
           echo "Job output: $RECEIVED_VERSION"
 
+  rust_checks:
+    name: Lab Rust tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Run Rust tests
+        working-directory: server
+        run: cargo test --all-features --locked
+
+  python_checks:
+    name: Lab Python tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        working-directory: client
+        run: python -m pip install --requirement requirements-dev.txt
+
+      - name: Run Python tests
+        working-directory: client
+        run: python -m pytest
+
   report:
     name: Workflow report
     needs:
       - experiment
       - consumer
+      - rust_checks
+      - python_checks
     if: ${{ always() }}
     runs-on: ubuntu-latest
 
@@ -121,12 +158,16 @@ jobs:
           CONSUMER_RESULT: ${{ needs.consumer.result }}
           PROJECT_VERSION: ${{ needs.experiment.outputs.version }}
           SIMULATED_OUTCOME: ${{ needs.experiment.outputs.simulated_outcome }}
+          RUST_RESULT: ${{ needs.rust_checks.result }}
+          PYTHON_RESULT: ${{ needs.python_checks.result }}
         run: |
           echo "Workflow report"
           echo "Experiment: $EXPERIMENT_RESULT"
           echo "Consumer: $CONSUMER_RESULT"
           echo "Version: ${PROJECT_VERSION:-unavailable}"
           echo "Simulated step outcome: ${SIMULATED_OUTCOME:-unavailable}"
+          echo "Rust tests: $RUST_RESULT"
+          echo "Python tests: $PYTHON_RESULT"
           {
             echo "## Bilan du laboratoire"
             echo ""
@@ -136,4 +177,6 @@ jobs:
             echo "| Consumer | $CONSUMER_RESULT |"
             echo "| Version | ${PROJECT_VERSION:-unavailable} |"
             echo "| Échec simulé — résultat brut | ${SIMULATED_OUTCOME:-unavailable} |"
+            echo "| Rust tests | $RUST_RESULT |"
+            echo "| Python tests | $PYTHON_RESULT |"
           } >> "$GITHUB_STEP_SUMMARY"
