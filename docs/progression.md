@@ -27,7 +27,7 @@ Les compléments reportés ne sont pas considérés comme acquis avant leur vali
 | 7 — Matrice Rust multiplateforme | Terminé | Matrices avec `include` ; `fail-fast` ; runners Linux et Windows ; binaires ELF et PE ; artifacts spécifiques aux plateformes ; steps conditionnels ; dépendances entre matrices | Approfondir les chaînes de jobs indépendantes par plateforme | Builds et vérifications Linux x86-64 et Windows x86-64, avec échec Windows volontaire | PR nº 9 ; `21e3b77` |
 | 8 — Serveur HTTP et intégration Rust-Python | Terminé | Axum ; Tokio ; routes HTTP ; réponses JSON ; tests directs du routeur ; client Python HTTP ; processus en arrière-plan ; attente de disponibilité ; nettoyage ; test d’intégration | Approfondir la configuration réseau, les timeouts et les tests d’échec en CI | Serveur Rust interrogé par un client Python dans un job GitHub Actions avec vérifications Linux et Windows | PR nº 11 ; `6b93bc3` |
 | 9 — Docker et configuration réseau | Terminé | Adresse configurable ; image et conteneur ; build multi-stage ; contexte Docker ; publication de ports ; interfaces réseau ; utilisateur non administrateur ; intégration Docker en CI | Approfondir le cache de build et la publication des images | Image construite localement et en CI, diagnostic Python, comparaison des écoutes réseau | PR nº 13 ; `0eff02d` |
-| 10 — Révision générale et compléments | Non commencé | — | Outputs de step et de job ; rapport final ; stratégies d'échec ; exclusions ; intégration Python sous Windows ; arrêt gracieux ; logs ; paquet Windows et test physique | Révision cumulative, scénarios d'échec et PR finale de consolidation prévus | — |
+| 10 — Révision générale et compléments | En cours | Variables shell ; GITHUB_ENV ; outputs de step et de job ; needs ; rapport Markdown ; always() ; continue-on-error ; outcome/conclusion ; timeout ; tests Rust/Python parallèles | Exclusions de matrice ; intégration Python sous Windows ; arrêt gracieux ; conservation des logs ; paquet Windows et test physique ; consolidation finale | Révision cumulative, scénarios d'échec et PR finale de consolidation prévus | — |
 | 11 — Tags et versionnement sémantique | Non commencé | — | Tags légers et annotés ; SemVer ; préversions ; cohérence tag/Cargo/API | — | — |
 | 12 — GitHub Releases | Non commencé | — | Publication sur tag ; assets ; empreintes ; permissions ; test Windows | — | — |
 | 13 — Secrets, variables et environnements | Non commencé | — | Données fictives ; portées ; masquage ; rotation ; validation manuelle | — | — |
@@ -199,6 +199,20 @@ Les compléments reportés ne sont pas considérés comme acquis avant leur vali
 - Anciens modules 10 à 16 décalés vers 11 à 17 sans suppression de leurs exigences.
 - Programme de 18 modules numérotés de 0 à 17 ; aucun module supplémentaire décidé.
 - Cadre pédagogique et consignes persistantes enregistrés dans `AGENTS.md`.
+
+### 2026-10-31 — Module 10 : jobs et outputs
+
+- Portée des variables shell et persistance des fichiers entre steps observées.
+- Valeur transmise avec `GITHUB_ENV`, puis avec un output de step et de job.
+- Version du paquet extraite avec `cargo metadata`.
+- Output manquant diagnostiqué puis réparé : runs `40983696019` et `41061573215`.
+- Rapport exécuté malgré un échec grâce à `always()` : run `41138684169`.
+- Échec toléré et distinction `outcome` / `conclusion` observés : run `41140453728`.
+- Résultat brut transmis au rapport : run `41141319499`.
+- Timeout de step provoqué puis réparé : runs `41142846704` et `41143810022`.
+- Rapport Markdown affiché dans le résumé GitHub : run `41145054526`.
+- Tests Rust et Python exécutés en parallèle et regroupés dans le rapport : run `41156311984`.
+- Module 10 toujours en cours ; les autres compléments du programme restent à pratiquer.
 
 ## Questions en suspens
 
