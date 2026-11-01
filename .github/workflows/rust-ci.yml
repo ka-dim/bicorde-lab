@@ -336,3 +336,12 @@ jobs:
           PYTHONPATH=client/src \
             python -m bicorde_client \
             http://127.0.0.1:3000
+
+      - name: Upload integration server logs
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: rust-python-integration-logs
+          path: server.log
+          if-no-files-found: warn
+          retention-days: 7
