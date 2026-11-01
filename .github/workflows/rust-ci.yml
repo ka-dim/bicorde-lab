@@ -335,7 +335,7 @@ jobs:
 
           PYTHONPATH=client/src \
             python -m bicorde_client \
-            http://127.0.0.1:3000
+            http://127.0.0.1:3999
 
       - name: Upload integration server logs
         if: ${{ always() }}
