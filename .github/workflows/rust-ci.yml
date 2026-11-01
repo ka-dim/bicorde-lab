@@ -297,7 +297,9 @@ jobs:
 
           chmod +x downloaded-server/server
 
-          downloaded-server/server > server.log 2>&1 & server_pid=$!
+          BICORDE_ADDRESS=127.0.0.1:invalid \
+            downloaded-server/server > server.log 2>&1 &
+          server_pid=$!
 
           cleanup() {
             kill "$server_pid" 2>/dev/null || true
